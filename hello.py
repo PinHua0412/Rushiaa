@@ -1,34 +1,32 @@
 from typing import Sized, SupportsIndex
+
 import discord 
 import time
 import random
-import datetime
+from datetime import datetime
 import asyncio
+
 from PIL import Image 
 from io import BytesIO
 from discord.abc import User
 from discord.client import Client
-from discord.member import Member 
+from discord.member import Member
+ 
 import requests
+
 from discord import asset
 from discord import activity
 from discord.activity import Activity, BaseActivity, CustomActivity, Game, Spotify, create_activity
 from discord.enums import ActivityType
 from discord.ext import commands
-client = commands.Bot(command_prefix=commands.when_mentioned_or('*'))
 
+client = commands.Bot(command_prefix=commands.when_mentioned_or('*'))
 
 @client.event
 async def on_ready():
     print(">>Bot is online<<")
     print(client.user.name)
     print(client.user.id)
-
-
-
-
-
-
 
 @client.command()
 async def view_emojis(ctx):
@@ -39,15 +37,15 @@ async def view_emojis(ctx):
 
 @client.command()
 async def pornhub(ctx):
- a =random.randrange(1,1000)
- a=format('{0:04d}'.format(a))
- await ctx.send("http://porngif.cz/gif/ze%20predu/"+a+".gif")  
+ a = random.randrange(1, 1000)
+ a = format('{0:04d}'.format(a))
+ await ctx.send(f"http://porngif.cz/gif/ze%20predu/{a}.gif")  
 
 @client.command()
 async def wallpaper(ctx):
  a =random.randrange(1,600000)
  a=format('{0:06d}'.format(a))
- await ctx.send("https://wall.alphacoders.com/big.php?i="+a)
+ await ctx.send(f"https://wall.alphacoders.com/big.php?i={a}")
 
 @client.command()
 async def hi(ctx):
@@ -55,15 +53,18 @@ async def hi(ctx):
  t2 = '18:00'
  t3 = '06:00'
  t4 = '00:00'
- now = datetime.datetime.now().strftime("%H:%M")
- if t3 <= now < t1:
-     testt="早上好 現在時間"+now
- if t1 <= now < t2:
-     testt="午安 現在時間"+now
- if t2 <= now:
-     testt="晚安 現在時間"+now
- if t4 <= now < t3:
-     testt="凌晨了 現在時間"+now
+ 
+ now = datetime.now().hour
+ 
+ if now >= 18:
+     testt = "早上好 現在時間" + t2
+ elif now >= 12:
+     testt = "午安 現在時間" + t1
+ elif now >= 6:
+     testt = "早上好 現在時間" + t3
+ else:
+     testt = "凌晨了 現在時間" + t4
+     
  await ctx.send(testt) 
  
  
@@ -87,7 +88,7 @@ async def 角色卡(ctx, *, member:discord.Member=None):
  t2 = '18:00'
  t3 = '06:00'
  t4 = '00:00'
- now = datetime.datetime.now().strftime("%H:%M")
+ now = datetime.now().strftime("%H:%M")
  testt="123123"
  if t3 <= now < t1:
      testt="早上好 現在時間:"+now
